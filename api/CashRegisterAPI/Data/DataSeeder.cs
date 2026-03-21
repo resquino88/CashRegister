@@ -23,9 +23,6 @@ public class DataSeeder
         var franceCountry = new Country(0, "France", "FRA", 100, []);
         context.Country.Add(franceCountry);
 
-        var finlandCountry = new Country(0, "Finland", "FIN", 100, []);
-        context.Country.Add(finlandCountry);
-
         await context.SaveChangesAsync();
 
         // Add USD and EURO currencies to Currency table
@@ -44,9 +41,6 @@ public class DataSeeder
 
         var franceCountryCurrency = new CountryCurrency(0, franceCountry, euroCurrency, true);
         context.CountryCurrency.Add(franceCountryCurrency);
-
-        var finalandCountryCurrency = new CountryCurrency(0, finlandCountry, euroCurrency, true);
-        context.CountryCurrency.Add(finalandCountryCurrency);
 
         await context.SaveChangesAsync();
 
