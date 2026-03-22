@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CashRegisterAPI.Migrations
 {
     [DbContext(typeof(CashRegisterDbContext))]
-    [Migration("20260321204008_Initialize_Tables")]
+    [Migration("20260322134553_Initialize_Tables")]
     partial class Initialize_Tables
     {
         /// <inheritdoc />

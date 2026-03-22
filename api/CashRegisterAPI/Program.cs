@@ -25,14 +25,15 @@ builder.Services.AddTransient<IRuleEngine, RuleEngine>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var databaseConnectionString = builder.Configuration.GetConnectionString("Database");
+var webAppConnectionString = builder.Configuration.GetConnectionString("WebApp");
 
 // Register the DbContext service
-builder.Services.AddDbContext<CashRegisterDbContext>(options => options.UseNpgsql(connectionString));
+builder.Services.AddDbContext<CashRegisterDbContext>(options => options.UseNpgsql(databaseConnectionString));
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("ReactApp", policy =>
-        policy.WithOrigins("http://localhost:3000")
+        policy.WithOrigins(webAppConnectionString!)
               .AllowAnyMethod()
               .AllowAnyHeader());
 });
