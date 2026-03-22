@@ -1,4 +1,4 @@
-import type { Rule } from '@/endpoints/rule'
+import type { Rule } from '@/endpoints'
 import apiClient from '@/endpoints/apiClient'
 
 export async function getAllRules(): Promise<Rule[]> {

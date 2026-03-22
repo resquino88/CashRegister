@@ -1,4 +1,4 @@
-import type { Country } from '@/endpoints/country'
+import type { Country } from '@/endpoints'
 import apiClient from '@/endpoints/apiClient'
 
 export async function getAllCountries(): Promise<Country[]> {

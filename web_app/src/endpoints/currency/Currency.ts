@@ -1,4 +1,4 @@
-import type { Denomination } from "@/endpoints/denomination"
+import type { Denomination } from "@/endpoints"
 
 export interface Currency {
   id: number

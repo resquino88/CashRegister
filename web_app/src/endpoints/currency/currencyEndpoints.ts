@@ -1,4 +1,4 @@
-import type { Currency } from '@/endpoints/currency'
+import type { Currency } from '@/endpoints'
 import apiClient from '@/endpoints/apiClient'
 
 export async function getAllCurrencies(): Promise<Currency[]> {

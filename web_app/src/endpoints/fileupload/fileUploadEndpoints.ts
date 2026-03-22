@@ -1,4 +1,4 @@
-import type { UploadInfo } from '@/endpoints/fileupload'
+import type { UploadInfo } from '@/endpoints'
 import apiClient from '@/endpoints/apiClient'
 
 export async function uploadFile(file: File, uploadInfo: UploadInfo): Promise<Blob> {

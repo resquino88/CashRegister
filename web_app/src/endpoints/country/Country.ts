@@ -1,4 +1,4 @@
-import type { Currency } from '@/endpoints/currency'
+import type { Currency } from '@/endpoints'
 
 export interface Country {
   id: number

@@ -1,4 +1,4 @@
-import type { Denomination } from '@/endpoints/denomination'
+import type { Denomination } from '@/endpoints'
 import apiClient from '@/endpoints/apiClient'
 
 export async function getAllDenominations(): Promise<Denomination[]> {
