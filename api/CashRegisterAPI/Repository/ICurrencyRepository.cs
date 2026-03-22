@@ -1,7 +1,7 @@
-﻿using CashRegisterAPI.Domain;
+using CashRegisterAPI.Domain;
 
 namespace CashRegisterAPI.Repository;
 
-public interface ICurrencyRepository: IRepository<Currency>
+public interface ICurrencyRepository : IRepository<Currency>
 {
 }

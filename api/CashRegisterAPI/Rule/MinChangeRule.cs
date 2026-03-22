@@ -1,4 +1,4 @@
-﻿using CashRegisterAPI.DTO;
+using CashRegisterAPI.DTO;
 using System.Text;
 
 namespace CashRegisterAPI.Rule;
@@ -11,7 +11,7 @@ public class MinChangeRule : IRule<string, BasicRuleInfoDTO>
     {
         var change = info.AmountPaid - info.AmountOwed;
 
-        var sortedDenominations = info.Denominations.Where(d => d.Value < change).OrderByDescending(d => d.Value).ToArray();
+        var sortedDenominations = info.Denominations.Where(d => d.Value <= change).OrderByDescending(d => d.Value).ToArray();
 
         StringBuilder sb = new("");
         var currChange = change;

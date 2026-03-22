@@ -11,7 +11,11 @@ public static class OutputParser
 {
     public static long ParseTotal(string output, DenominationDTO[] denominations)
     {
-        if (string.IsNullOrWhiteSpace(output)) return 0;
+        if (string.IsNullOrWhiteSpace(output))
+        {
+            return 0;
+        }
+
         long total = 0;
         foreach (var part in output.Split(", "))
         {

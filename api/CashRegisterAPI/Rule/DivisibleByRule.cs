@@ -1,4 +1,4 @@
-﻿using CashRegisterAPI.DTO;
+using CashRegisterAPI.DTO;
 using CashRegisterAPI.Utility;
 using Microsoft.Extensions.Options;
 using System.Text;

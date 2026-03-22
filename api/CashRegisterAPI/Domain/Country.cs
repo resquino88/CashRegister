@@ -1,4 +1,4 @@
-﻿namespace CashRegisterAPI.Domain;
+namespace CashRegisterAPI.Domain;
 
 public class Country
 {
@@ -6,7 +6,7 @@ public class Country
     public string Name { get; private set; } = string.Empty;
 
     // In ISO 3166-1 alpha-3 format
-    public string Abbrevation { get; private set;  } = string.Empty;
+    public string Abbrevation { get; private set; } = string.Empty;
     public int CurrencyMultipler { get; private set; }
     public List<CountryCurrency> CountryCurrencies { get; private set; } = [];
 

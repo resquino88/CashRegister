@@ -1,4 +1,4 @@
-﻿using CashRegisterAPI.Domain;
+using CashRegisterAPI.Domain;
 using System.Xml.Linq;
 
 namespace CashRegisterAPI.DTO;

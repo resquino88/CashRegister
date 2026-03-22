@@ -10,7 +10,7 @@ namespace CashRegisterAPI.Controllers
       IFileParser fileParser) : ControllerBase
     {
         [HttpPost]
-        public async Task<IActionResult> FileUpload ([FromForm] IFormFile file, [FromForm] UploadInfoDto uploadInfo)
+        public async Task<IActionResult> FileUpload([FromForm] IFormFile file, [FromForm] UploadInfoDto uploadInfo)
         {
             try
             {

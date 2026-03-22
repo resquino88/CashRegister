@@ -1,4 +1,4 @@
-﻿using CashRegisterAPI.Data;
+using CashRegisterAPI.Data;
 using CashRegisterAPI.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,25 +9,13 @@ public class DenominationRepository(CashRegisterDbContext context) : IDenominati
 
     public async Task<Denomination> GetByName(string denominationName)
     {
-        var denomination = await context.Denomination.SingleOrDefaultAsync(d => d.Name == denominationName);
-
-        if (denomination == null)
-        {
-            throw new InvalidOperationException($"No denominations exist with a name of: ${denominationName}");
-        }
-
+        var denomination = await context.Denomination.SingleOrDefaultAsync(d => d.Name == denominationName) ?? throw new InvalidOperationException($"No denominations exist with a name of: ${denominationName}");
         return denomination;
     }
 
     public async Task<Denomination> GetById(int id)
     {
-        var denomination = await context.Denomination.SingleOrDefaultAsync(d => d.Id == id);
-
-        if (denomination == null)
-        {
-            throw new InvalidOperationException($"No denominations exist with an id of: ${id}");
-        }
-
+        var denomination = await context.Denomination.SingleOrDefaultAsync(d => d.Id == id) ?? throw new InvalidOperationException($"No denominations exist with an id of: ${id}");
         return denomination;
     }
 

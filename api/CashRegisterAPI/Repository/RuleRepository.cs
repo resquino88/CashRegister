@@ -1,4 +1,4 @@
-﻿using CashRegisterAPI.Data;
+using CashRegisterAPI.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace CashRegisterAPI.Repository;
@@ -7,25 +7,13 @@ public class RuleRepository(CashRegisterDbContext context) : IRuleRepository
 {
     public async Task<Domain.Rule> GetByName(string ruleName)
     {
-        var rule = await context.Rule.SingleOrDefaultAsync(r => r.Name == ruleName);
-
-        if (rule == null)
-        {
-            throw new InvalidOperationException($"No rules exist with a name of: ${ruleName}");
-        }
-
+        var rule = await context.Rule.SingleOrDefaultAsync(r => r.Name == ruleName) ?? throw new InvalidOperationException($"No rules exist with a name of: ${ruleName}");
         return rule;
     }
 
     public async Task<Domain.Rule> GetById(int id)
     {
-        var rule = await context.Rule.SingleOrDefaultAsync(c => c.Id == id);
-
-        if (rule == null)
-        {
-            throw new InvalidOperationException($"No rules exist with an id of: ${id}");
-        }
-
+        var rule = await context.Rule.SingleOrDefaultAsync(c => c.Id == id) ?? throw new InvalidOperationException($"No rules exist with an id of: ${id}");
         return rule;
     }
 
