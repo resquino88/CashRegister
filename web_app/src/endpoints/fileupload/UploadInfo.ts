@@ -1,4 +1,4 @@
 export interface UploadInfo {
-  countryId: number
-  currencyId: number
+  countryId: number;
+  currencyId: number;
 }
