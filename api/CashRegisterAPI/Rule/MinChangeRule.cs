@@ -1,5 +1,4 @@
 using CashRegisterAPI.DTO;
-using System.Text;
 
 namespace CashRegisterAPI.Rule;
 
@@ -18,7 +17,7 @@ public class MinChangeRule : IRule<string, BasicRuleInfoDTO>
 
         var sortedDenominations = info.Denominations.Where(d => d.Value <= change).OrderByDescending(d => d.Value).ToArray();
 
-        StringBuilder sb = new("");
+        var parts = new List<string>();
         var currChange = change;
         int currDenominationValue = 0;
         int denominationCount = 0;
@@ -36,33 +35,19 @@ public class MinChangeRule : IRule<string, BasicRuleInfoDTO>
                 denominationCount += 1;
             }
 
-            sb.Append(denominationCount);
-            sb.Append(' ');
-
-            if (denominationCount > 1 || denominationCount == 0)
+            if (denominationCount == 0)
             {
-                if (currDenomination.PluralName != null)
-                {
-                    sb.Append(currDenomination.PluralName);
-                }
-                else
-                {
-                    sb.Append(currDenomination.Name);
-                    sb.Append('s');
-                }
-            }
-            else
-            {
-                sb.Append(currDenomination.Name);
+                continue;
             }
 
-            if (i + 1 != sortedDenominations.Length)
-            {
-                sb.Append(", ");
-            }
+            string name = denominationCount > 1
+                ? (currDenomination.PluralName ?? currDenomination.Name + "s")
+                : currDenomination.Name;
+
+            parts.Add($"{denominationCount} {name}");
         }
 
-        return sb.ToString();
+        return string.Join(", ", parts);
     }
 
     public bool IsApplicable(BasicRuleInfoDTO info) => true;

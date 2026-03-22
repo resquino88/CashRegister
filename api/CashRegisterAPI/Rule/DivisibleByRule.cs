@@ -1,7 +1,6 @@
 using CashRegisterAPI.DTO;
 using CashRegisterAPI.Utility;
 using Microsoft.Extensions.Options;
-using System.Text;
 
 namespace CashRegisterAPI.Rule;
 
@@ -22,7 +21,7 @@ public class DivisibleByRule(IOptions<RuleEngineInfo> options) : IRule<string, B
 
         var sortedDenominations = info.Denominations.Where(d => d.Value <= change).OrderByDescending(d => d.Value).ToArray();
 
-        StringBuilder sb = new("");
+        var parts = new List<string>();
         var currChange = change;
         int currDenominationValue = 0;
         long denominationCount = 0;
@@ -46,37 +45,23 @@ public class DivisibleByRule(IOptions<RuleEngineInfo> options) : IRule<string, B
                 currChange -= denominationCount * currDenominationValue;
             }
 
-            sb.Append(denominationCount);
-            sb.Append(' ');
-
-            if (denominationCount > 1 || denominationCount == 0)
+            if (denominationCount == 0)
             {
-                if (currentDenominationDto.PluralName != null)
-                {
-                    sb.Append(currentDenominationDto.PluralName);
-                }
-                else
-                {
-                    sb.Append(currentDenominationDto.Name);
-                    sb.Append('s');
-                }
-            }
-            else
-            {
-                sb.Append(currentDenominationDto.Name);
+                continue;
             }
 
-            if (i + 1 != sortedDenominations.Length)
-            {
-                sb.Append(", ");
-            }
+            string name = denominationCount > 1
+                ? (currentDenominationDto.PluralName ?? currentDenominationDto.Name + "s")
+                : currentDenominationDto.Name;
+
+            parts.Add($"{denominationCount} {name}");
         }
 
-        return sb.ToString();
+        return string.Join(", ", parts);
     }
 
     public bool IsApplicable(BasicRuleInfoDTO info)
     {
-        return (info.AmountPaid - info.AmountOwed) % _divisor == 0;
+        return info.AmountOwed % _divisor == 0;
     }
 }

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Full-stack cash register change calculator. The **API** (`api/`) is an ASP.NET Core 10 REST API: given an amount owed and amount paid, it returns the minimum denominations needed. Special rule: if the change amount is divisible by 3, denominations are randomly allocated (but the total must still be correct). The **frontend** (`web_app/`) is a React + TypeScript + Vite app that lets users upload a transaction file, select a country/currency, and download the calculated change as a text file.
+Full-stack cash register change calculator. The **API** (`api/`) is an ASP.NET Core 10 REST API: given an amount owed and amount paid, it returns the minimum denominations needed. Special rule: if the owed amount is divisible by 3, denominations are randomly allocated (but the total must still be correct). The **frontend** (`web_app/`) is a React + TypeScript + Vite app that lets users upload a transaction file, select a country/currency, and download the calculated change as a text file.
 
 ## Commands
 
