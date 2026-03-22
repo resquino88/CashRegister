@@ -49,7 +49,9 @@ public class DivisibleByRuleTests
         var info = RuleInfo.Create(0, 300, Denominations.AllCoins);
 
         for (int i = 0; i < 20; i++)
+        {
             Assert.That(OutputParser.ParseTotal(rule.Apply(info), Denominations.AllCoins), Is.EqualTo(300));
+        }
     }
 
     [Test]

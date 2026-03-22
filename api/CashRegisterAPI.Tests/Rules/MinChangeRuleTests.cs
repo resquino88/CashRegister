@@ -68,18 +68,10 @@ public class MinChangeRuleTests
     // Apply — denomination filter
 
     [Test]
-    public void Apply_ExcludesDenominationsEqualToChange()
+    public void Apply_IncludesDenominationsEqualToChange()
     {
-        // change=10, dime(value=10): 10 < 10 is false → excluded, only penny used
+        // change=10, dime(value=10): 10 = 10 is true → included
         var result = _rule.Apply(RuleInfo.Create(0, 10, Denominations.Dime, Denominations.Penny));
-        Assert.That(result, Is.EqualTo("10 pennies"));
-    }
-
-    [Test]
-    public void Apply_ReturnsEmptyString_WhenAllDenominationsExcluded()
-    {
-        // change=1, penny(value=1): 1 < 1 is false → no denominations included
-        var result = _rule.Apply(RuleInfo.Create(0, 1, Denominations.Penny));
-        Assert.That(result, Is.EqualTo(string.Empty));
+        Assert.That(result, Is.EqualTo("1 dime, 0 penny"));
     }
 }

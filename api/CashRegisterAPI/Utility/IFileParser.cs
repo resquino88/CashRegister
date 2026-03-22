@@ -1,4 +1,4 @@
-﻿using CashRegisterAPI.DTO;
+using CashRegisterAPI.DTO;
 
 namespace CashRegisterAPI.Utility;
 

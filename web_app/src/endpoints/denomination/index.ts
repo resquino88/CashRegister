@@ -1,2 +1,2 @@
-export * from './Denomination'
-export * from './denominationEndpoints'
+export * from "./Denomination";
+export * from "./denominationEndpoints";

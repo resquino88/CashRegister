@@ -1,4 +1,4 @@
-﻿using CashRegisterAPI.Domain;
+using CashRegisterAPI.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace CashRegisterAPI.Data;
@@ -13,8 +13,8 @@ public class CashRegisterDbContext(DbContextOptions<CashRegisterDbContext> optio
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-       modelBuilder.Entity<CountryCurrency>().HasOne(cc => cc.Country)
-            .WithMany(c => c.CountryCurrencies).HasForeignKey(cc => cc.CountryId);
+        modelBuilder.Entity<CountryCurrency>().HasOne(cc => cc.Country)
+             .WithMany(c => c.CountryCurrencies).HasForeignKey(cc => cc.CountryId);
 
         modelBuilder.Entity<CountryCurrency>()
             .HasOne(cc => cc.Currency)
@@ -22,7 +22,7 @@ public class CashRegisterDbContext(DbContextOptions<CashRegisterDbContext> optio
             .HasForeignKey(cc => cc.CurrencyId);
 
         modelBuilder.Entity<Currency>().HasIndex(c => c.Name);
-        modelBuilder.Entity<Denomination>().HasIndex(d => new {d.Name, d.CurrencyId});
+        modelBuilder.Entity<Denomination>().HasIndex(d => new { d.Name, d.CurrencyId });
         modelBuilder.Entity<Country>().HasIndex(c => new { c.Name, c.Abbrevation });
         modelBuilder.Entity<Domain.Rule>().HasIndex(r => r.Name);
         modelBuilder.Entity<Domain.Rule>().HasIndex(r => r.Priority);

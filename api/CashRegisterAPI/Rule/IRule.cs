@@ -1,4 +1,4 @@
-﻿namespace CashRegisterAPI.Rule;
+namespace CashRegisterAPI.Rule;
 
 // T = return value
 // V = the current working value

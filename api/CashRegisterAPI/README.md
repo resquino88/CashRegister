@@ -67,7 +67,7 @@ Accepts a file and returns a plain-text file with the change denominations for e
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `file` | file | file — each line: `amountOwed,amountPaid` (e.g. `2.13,3.00`) |
+| `file` | file | Each line: `amountOwed,amountPaid` (e.g. `2.13,3.00`) |
 | `CountryId` | int | ID of the country (see seeded data below) |
 | `CurrencyId` | int | ID of the currency associated with that country |
 
@@ -87,7 +87,7 @@ Accepts a file and returns a plain-text file with the change denominations for e
 1 dollar,1 quarter,6 nickels,12 pennies
 ```
 
-> The last line is random because 5.00 − 3.33 = 1.67 → 167 cents, which is not divisible by 3. But if the change amount **is** divisible by 3, denominations are randomly assigned (total is still correct).
+> If the change amount is divisible by 3, denominations are randomly assigned — the total is still correct, but distribution varies each run.
 
 **Error responses:**
 
@@ -96,19 +96,89 @@ Accepts a file and returns a plain-text file with the change denominations for e
 | `400` | Invalid file format, amount paid < amount owed, or mismatched country/currency |
 | `500` | Unexpected server error |
 
+---
+
+### `GET /country`
+
+Returns all countries.
+
+### `GET /country/{id}`
+
+Returns a country by numeric ID. Returns `404` if not found.
+
+### `GET /country/{name}`
+
+Returns a country by name. Returns `404` if not found.
+
+---
+
+### `GET /currency`
+
+Returns all currencies.
+
+### `GET /currency/{id}`
+
+Returns a currency by numeric ID. Returns `404` if not found.
+
+### `GET /currency/{name}`
+
+Returns a currency by name. Returns `404` if not found.
+
+---
+
+### `GET /denomination`
+
+Returns all denominations.
+
+### `GET /denomination/{id}`
+
+Returns a denomination by numeric ID. Returns `404` if not found.
+
+### `GET /denomination/{name}`
+
+Returns a denomination by name. Returns `404` if not found.
+
+---
+
+### `GET /rule`
+
+Returns all rules (active and inactive).
+
+### `GET /rule/active`
+
+Returns only rules where `IsActive` is `true`.
+
+### `GET /rule/{id}`
+
+Returns a rule by numeric ID. Returns `404` if not found.
+
+### `GET /rule/{name}`
+
+Returns a rule by name. Returns `404` if not found.
+
+---
+
+All read endpoints return `500` on unexpected errors.
+
 ## Seeded Data
 
 On first startup the database is populated with:
 
-| Country | ID | Currency | Currency ID | Decimal Separator |
-|---------|----|----------|-------------|-------------------|
-| United States of America | 1 | USD | 1 | `.` |
-| France | 2 | EURO | 2 | `,` |
-| Finland | 3 | EURO | 2 | `,` |
+| Country | Currency | Decimal Separator |
+|---------|----------|-------------------|
+| United States of America (USA) | USD | `.` |
+| France (FRA) | EURO | `,` |
 
-**USD denominations:** penny, nickel, dime, quarter, one dollar, five dollar, ten dollar, twenty dollar, fifty dollar, one hundred dollar
+**USD denominations (10):** penny, nickel, dime, quarter, one dollar, five dollar, ten dollar, twenty dollar, fifty dollar, one hundred dollar
 
-**EURO denominations:** one cent through five hundred euro (15 denominations)
+**EURO denominations (15):** one cent, two cent, five cent, ten cent, twenty cent, fifty cent, one euro, two euro, five euro, ten euro, twenty euro, fifty euro, one hundred euro, two hundred euro, five hundred euro
+
+**Rules seeded:**
+
+| Name | Priority | Active |
+|------|----------|--------|
+| `minChange` | 0 | Yes |
+| `divisibleBy` | 1 | Yes |
 
 ## Adding a New Rule
 
@@ -124,8 +194,8 @@ Tests live in `api/CashRegisterAPI.Tests/` and use NUnit 4 with Moq.
 
 ```bash
 cd api/CashRegisterAPI.Tests
-dotnet test                  # Run all tests
-dotnet test --filter "Name~MinChange"   # Run a single test class by name
+dotnet test                              # Run all tests
+dotnet test --filter "Name~MinChange"   # Run a subset by name
 ```
 
 **Test packages:**
@@ -142,7 +212,8 @@ dotnet test --filter "Name~MinChange"   # Run a single test class by name
 
 ```
 CashRegisterAPI.Tests/
-├── Controllers/        FileUploadController — response types and error handling
+├── Controllers/        FileUploadController, CountryController, CurrencyController,
+│                       DenominationController, RuleController — response types and error handling
 ├── Rules/              MinChangeRule and DivisibleByRule — apply/isApplicable logic
 ├── Utility/            RuleEngine and FileParser — orchestration and file parsing
 └── TestData/           Shared readonly data used across all test classes

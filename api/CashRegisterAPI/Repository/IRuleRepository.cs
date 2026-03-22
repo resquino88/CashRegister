@@ -1,4 +1,4 @@
-﻿namespace CashRegisterAPI.Repository;
+namespace CashRegisterAPI.Repository;
 
 public interface IRuleRepository : IRepository<Domain.Rule>
 {

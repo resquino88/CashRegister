@@ -1,4 +1,4 @@
-﻿namespace CashRegisterAPI.RuleOptions;
+namespace CashRegisterAPI.RuleOptions;
 
 public class DivisibleByRuleOptions
 {

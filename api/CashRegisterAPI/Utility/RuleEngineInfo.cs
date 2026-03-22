@@ -1,4 +1,4 @@
-﻿using CashRegisterAPI.Rule;
+using CashRegisterAPI.Rule;
 using CashRegisterAPI.RuleOptions;
 
 namespace CashRegisterAPI.Utility;

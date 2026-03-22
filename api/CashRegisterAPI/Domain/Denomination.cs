@@ -1,4 +1,4 @@
-﻿namespace CashRegisterAPI.Domain;
+namespace CashRegisterAPI.Domain;
 
 public class Denomination
 {

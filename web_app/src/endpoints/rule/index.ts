@@ -1,2 +1,2 @@
-export * from './Rule'
-export * from './ruleEndpoints'
+export * from "./Rule";
+export * from "./ruleEndpoints";

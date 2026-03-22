@@ -1,4 +1,4 @@
-﻿namespace CashRegisterAPI.DTO;
+namespace CashRegisterAPI.DTO;
 
 public class UploadInfoDto
 {

@@ -1,8 +1,8 @@
-import type { Denomination } from "@/endpoints/denomination"
+import type { Denomination } from "@/endpoints";
 
 export interface Currency {
-  id: number
-  name: string
-  currencySeparator: string
-  denominations: Denomination[]
+  id: number;
+  name: string;
+  currencySeparator: string;
+  denominations: Denomination[];
 }

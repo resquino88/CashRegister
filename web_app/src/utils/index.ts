@@ -1,1 +1,1 @@
-export { downloadBlob } from './downloadBlob'
+export { downloadBlob } from "./downloadBlob";

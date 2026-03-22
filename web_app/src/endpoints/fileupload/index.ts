@@ -1,2 +1,2 @@
-export * from './UploadInfo'
-export * from './fileUploadEndpoints'
+export * from "./UploadInfo";
+export * from "./fileUploadEndpoints";

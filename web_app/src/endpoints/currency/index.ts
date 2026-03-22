@@ -1,2 +1,2 @@
-export * from './Currency'
-export * from './currencyEndpoints'
+export * from "./Currency";
+export * from "./currencyEndpoints";

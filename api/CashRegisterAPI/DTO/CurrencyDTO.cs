@@ -1,4 +1,4 @@
-﻿using CashRegisterAPI.Domain;
+using CashRegisterAPI.Domain;
 
 namespace CashRegisterAPI.DTO;
 
