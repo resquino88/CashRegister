@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Receipt body -->
+  <rect x="6" y="2" width="20" height="26" rx="2" fill="#1565C0"/>
+  <!-- Torn bottom edge -->
+  <path d="M6 24 Q8 26 10 24 Q12 22 14 24 Q16 26 18 24 Q20 22 22 24 Q24 26 26 24 L26 28 Q24 26 22 28 Q20 30 18 28 Q16 26 14 28 Q12 30 10 28 Q8 26 6 28 Z" fill="#1565C0"/>
+  <!-- Receipt lines -->
+  <rect x="10" y="7" width="12" height="2" rx="1" fill="white" opacity="0.9"/>
+  <rect x="10" y="11" width="8" height="2" rx="1" fill="white" opacity="0.7"/>
+  <rect x="10" y="15" width="10" height="2" rx="1" fill="white" opacity="0.7"/>
+  <!-- Total line -->
+  <rect x="10" y="19" width="12" height="2" rx="1" fill="#90CAF9"/>
+</svg>

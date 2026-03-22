@@ -74,7 +74,37 @@ public class FileParserTests
         Assert.That(text, Does.Contain("1 dollar"));
     }
 
+    // Zero change
+
+    [Test]
+    public async Task ProcessFile_ReturnsNoChange_WhenAmountOwedEqualsAmountPaid()
+    {
+        var repoMock = new Mock<ICountryRepository>();
+        repoMock.Setup(r => r.GetById(1)).ReturnsAsync(Countries.BuildUsa());
+
+        var engineMock = new Mock<IRuleEngine>();
+        engineMock.Setup(e => e.Start(It.IsAny<BasicRuleInfoDTO>())).ReturnsAsync("No change");
+
+        var parser = new FileParser(repoMock.Object, engineMock.Object);
+
+        var result = await parser.ProcessFile(
+            FormFiles.Create("0.00,0.00\n"),
+            new UploadInfoDto { CountryId = 1, CurrencyId = 1 });
+
+        Assert.That(System.Text.Encoding.UTF8.GetString(result), Is.EqualTo("No change"));
+    }
+
     // Format validation
+
+    [Test]
+    public void ProcessFile_ThrowsFormatException_WhenLineContainsInvalidCharacters()
+    {
+        var (parser, _) = BuildParser();
+        Assert.ThrowsAsync<FormatException>(() =>
+            parser.ProcessFile(
+                FormFiles.Create("2.00,abc\n"),
+                new UploadInfoDto { CountryId = 1, CurrencyId = 1 }));
+    }
 
     [Test]
     public void ProcessFile_ThrowsFormatException_WhenLineHasNoValidAmounts()

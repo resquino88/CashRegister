@@ -32,6 +32,25 @@ public class DivisibleByRuleTests
         Assert.That(BuildRule(5).IsApplicable(RuleInfo.Create(0, 10, Denominations.Penny)), Is.True);
     }
 
+    // Apply — zero change
+
+    [Test]
+    public void Apply_ReturnsNoChange_WhenChangeIsZero()
+    {
+        var result = BuildRule(3).Apply(RuleInfo.Create(5, 5, Denominations.Penny));
+        Assert.That(result, Is.EqualTo("No change"));
+    }
+
+    // Apply — denomination filter
+
+    [Test]
+    public void Apply_IncludesDenominationsEqualToChange()
+    {
+        // change=10, dime(value=10): 10 <= 10 → included, must consume all change
+        var result = BuildRule(5).Apply(RuleInfo.Create(0, 10, Denominations.Dime));
+        Assert.That(OutputParser.ParseTotal(result, Denominations.AllCoins), Is.EqualTo(10));
+    }
+
     // Apply — total must equal change regardless of random allocation
 
     [Test]
