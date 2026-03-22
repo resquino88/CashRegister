@@ -57,12 +57,12 @@ public class MinChangeRuleTests
     }
 
     [Test]
-    public void Apply_IncludesZeroCountDenominations_WhenNotConsumed()
+    public void Apply_SkipsZeroCountDenominations_WhenNotConsumed()
     {
         // change=88 (300-212): quarter(25)<88→count=3(75), dime(10)<88→count=1(10),
-        // nickel(5)<88 but 3 remaining < 5 → count=0, penny(1)→count=3
+        // nickel(5)<88 but 3 remaining < 5 → count=0 (skipped), penny(1)→count=3
         var result = _rule.Apply(RuleInfo.Create(212, 300, Denominations.Quarter, Denominations.Dime, Denominations.Nickel, Denominations.Penny));
-        Assert.That(result, Is.EqualTo("3 quarters, 1 dime, 0 nickels, 3 pennies"));
+        Assert.That(result, Is.EqualTo("3 quarters, 1 dime, 3 pennies"));
     }
 
     // Apply — zero change
@@ -79,8 +79,8 @@ public class MinChangeRuleTests
     [Test]
     public void Apply_IncludesDenominationsEqualToChange()
     {
-        // change=10, dime(value=10): 10 = 10 is true → included
+        // change=10, dime(value=10): 10 <= 10 → included, consumes all change; penny→count=0 (skipped)
         var result = _rule.Apply(RuleInfo.Create(0, 10, Denominations.Dime, Denominations.Penny));
-        Assert.That(result, Is.EqualTo("1 dime, 0 pennies"));
+        Assert.That(result, Is.EqualTo("1 dime"));
     }
 }

@@ -87,7 +87,7 @@ Accepts a file and returns a plain-text file with the change denominations for e
 1 dollar,1 quarter,6 nickels,12 pennies
 ```
 
-> If the change amount is divisible by 3, denominations are randomly assigned — the total is still correct, but distribution varies each run.
+> If the owed amount is divisible by 3, denominations are randomly assigned — the total is still correct, but distribution varies each run.
 
 **Error responses:**
 

@@ -12,24 +12,24 @@ public class DivisibleByRuleTests
     // IsApplicable
 
     [Test]
-    public void IsApplicable_ReturnsTrue_WhenChangeDivisibleByDivisor()
+    public void IsApplicable_ReturnsTrue_WhenOwedDivisibleByDivisor()
     {
-        // change=9, 9 % 3 == 0
-        Assert.That(BuildRule(3).IsApplicable(RuleInfo.Create(0, 9, Denominations.Penny)), Is.True);
+        // owed=9, 9 % 3 == 0
+        Assert.That(BuildRule(3).IsApplicable(RuleInfo.Create(9, 18, Denominations.Penny)), Is.True);
     }
 
     [Test]
-    public void IsApplicable_ReturnsFalse_WhenChangeNotDivisibleByDivisor()
+    public void IsApplicable_ReturnsFalse_WhenOwedNotDivisibleByDivisor()
     {
-        // change=10, 10 % 3 == 1
-        Assert.That(BuildRule(3).IsApplicable(RuleInfo.Create(0, 10, Denominations.Penny)), Is.False);
+        // owed=10, 10 % 3 == 1
+        Assert.That(BuildRule(3).IsApplicable(RuleInfo.Create(10, 20, Denominations.Penny)), Is.False);
     }
 
     [Test]
     public void IsApplicable_RespectsCustomDivisor()
     {
-        // change=10, divisor=5 → 10 % 5 == 0
-        Assert.That(BuildRule(5).IsApplicable(RuleInfo.Create(0, 10, Denominations.Penny)), Is.True);
+        // owed=10, divisor=5 → 10 % 5 == 0
+        Assert.That(BuildRule(5).IsApplicable(RuleInfo.Create(10, 20, Denominations.Penny)), Is.True);
     }
 
     // Apply — zero change
