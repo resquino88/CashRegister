@@ -11,6 +11,11 @@ public class MinChangeRule : IRule<string, BasicRuleInfoDTO>
     {
         var change = info.AmountPaid - info.AmountOwed;
 
+        if (change == 0)
+        {
+            return "No change";
+        }
+
         var sortedDenominations = info.Denominations.Where(d => d.Value <= change).OrderByDescending(d => d.Value).ToArray();
 
         StringBuilder sb = new("");
@@ -34,7 +39,7 @@ public class MinChangeRule : IRule<string, BasicRuleInfoDTO>
             sb.Append(denominationCount);
             sb.Append(' ');
 
-            if (denominationCount > 1)
+            if (denominationCount > 1 || denominationCount == 0)
             {
                 if (currDenomination.PluralName != null)
                 {

@@ -62,7 +62,16 @@ public class MinChangeRuleTests
         // change=88 (300-212): quarter(25)<88→count=3(75), dime(10)<88→count=1(10),
         // nickel(5)<88 but 3 remaining < 5 → count=0, penny(1)→count=3
         var result = _rule.Apply(RuleInfo.Create(212, 300, Denominations.Quarter, Denominations.Dime, Denominations.Nickel, Denominations.Penny));
-        Assert.That(result, Is.EqualTo("3 quarters, 1 dime, 0 nickel, 3 pennies"));
+        Assert.That(result, Is.EqualTo("3 quarters, 1 dime, 0 nickels, 3 pennies"));
+    }
+
+    // Apply — zero change
+
+    [Test]
+    public void Apply_ReturnsNoChange_WhenChangeIsZero()
+    {
+        var result = _rule.Apply(RuleInfo.Create(5, 5, Denominations.Penny));
+        Assert.That(result, Is.EqualTo("No change"));
     }
 
     // Apply — denomination filter
@@ -72,6 +81,6 @@ public class MinChangeRuleTests
     {
         // change=10, dime(value=10): 10 = 10 is true → included
         var result = _rule.Apply(RuleInfo.Create(0, 10, Denominations.Dime, Denominations.Penny));
-        Assert.That(result, Is.EqualTo("1 dime, 0 penny"));
+        Assert.That(result, Is.EqualTo("1 dime, 0 pennies"));
     }
 }

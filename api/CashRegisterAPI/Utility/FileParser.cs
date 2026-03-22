@@ -17,6 +17,7 @@ public class FileParser(ICountryRepository countryRepository, IRuleEngine ruleEn
         };
 
         string pattern = $@"[0-9]+{Regex.Escape(currency.CurrencySeparator.ToString())}[0-9]+";
+        string lineValidationPattern = $@"^[\d,{Regex.Escape(currency.CurrencySeparator.ToString())}]+$";
 
         var lines = new List<string>();
 
@@ -40,6 +41,11 @@ public class FileParser(ICountryRepository countryRepository, IRuleEngine ruleEn
 
         foreach (var line in lines)
         {
+            if (!Regex.IsMatch(line, lineValidationPattern))
+            {
+                throw new FormatException($"Line '{line}' contains invalid characters.");
+            }
+
             matches = Regex.Matches(line, pattern);
 
             if (matches.Count != 2)
