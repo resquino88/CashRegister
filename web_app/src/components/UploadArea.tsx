@@ -44,7 +44,7 @@ export default function UploadArea({ file, setFile, selectedCurrency, onFileUplo
     if(file) {
       onFileUpload(file);
     }
-  }, [file])
+  }, [file, onFileUpload])
 
   return (
     <Paper variant="outlined" sx={{ p: 3 }}>

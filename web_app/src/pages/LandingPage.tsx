@@ -39,7 +39,7 @@ export default function LandingPage({onToggleMode} : LandingPageProps) {
 
   useEffect(() => {
     setCountryData()
-  }, [])
+  }, [setCountryData])
 
   const initiateFileUpload = async(file: File) => {
     if(!headerData || !headerData.selectedCountry || !headerData.selectedCurrency) return;
