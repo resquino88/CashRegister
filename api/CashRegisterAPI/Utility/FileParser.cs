@@ -48,7 +48,7 @@ public class FileParser(ICountryRepository countryRepository, IRuleEngine ruleEn
 
             if(matches.Count != 2)
             {
-                throw new FormatException($"Line '{line}' is invalid. Expected format: amount{currency.CurrencySeparator}amount (e.g. 2{currency.CurrencySeparator}13{currency.CurrencySeparator}3{currency.CurrencySeparator}00).");
+                throw new FormatException($"Line '{line}' is invalid. Expected format: amount{currency.CurrencySeparator}amount (e.g. 2{currency.CurrencySeparator}13,3{currency.CurrencySeparator}00).");
             }
 
             amountOwed = (long)(decimal.Parse(matches[0].Value, info) * country.CurrencyMultiplier);
